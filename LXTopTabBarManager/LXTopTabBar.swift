@@ -9,8 +9,23 @@
 import UIKit
 import LXFitManager
 
-public typealias TopTabBarCallBack = (Int) -> Void
+public struct LXItem {
+    public var title: String
+    public var image: UIImage?
+    public var selectImage: UIImage?
 
+    public init(title: String,
+                image: UIImage? = nil,
+                selectImage: UIImage? = nil)
+    {
+        self.title = title
+        self.image = image
+        self.selectImage = selectImage
+    }
+}
+
+
+public typealias TopTabBarCallBack = (Int) -> Void
 public class LXTopTabBar: UIView {
 
     /// 下划线颜色
@@ -29,24 +44,12 @@ public class LXTopTabBar: UIView {
     
     /// 默认title颜色
     public var normalTitleColor: UIColor = UIColor.lightGray {
-        didSet {
-            for button in buttons {
-                if button != lastSelectButton {
-                    button.setTitleColor(normalTitleColor, for: .normal)
-                }
-            }
-        }
+        didSet { setupItemButtons() }
     }
     
     /// 选中title颜色
     public var selectTitleColor: UIColor = UIColor.red {
-       didSet {
-           for button in buttons {
-               if button == lastSelectButton {
-                   button.setTitleColor(selectTitleColor, for: .selected)
-               }
-            }
-        }
+       didSet { setupItemButtons() }
     }
     
     /// 选中title字体大小
@@ -84,7 +87,8 @@ public class LXTopTabBar: UIView {
      public var callBack: TopTabBarCallBack?
     
      fileprivate lazy var currentIndex: Int = 0
-     fileprivate var titles: [String]
+     fileprivate var titleItems: [LXItem]
+     fileprivate var Button: UIButton.Type
      fileprivate lazy var buttons = [UIButton]()
      fileprivate var lastSelectButton: UIButton?
 
@@ -98,11 +102,19 @@ public class LXTopTabBar: UIView {
          return bottomLine
      }()
          
-    public init(frame: CGRect, titles: [String]) {
-         self.titles = titles
-         super.init(frame: frame)
-         setupUI()
-     }
+    /// 指定构造器
+    /// titleItems 标题内容
+    /// Button 外部的button只建议修改图文布局 颜色 大小 请设置属性
+    public init(frame: CGRect,
+                titleItems: [LXItem],
+                Button: UIButton.Type)
+    {
+        self.titleItems = titleItems
+        self.Button = Button
+        super.init(frame: frame)
+        setupItemUI()
+    }
+    
      required public init?(coder aDecoder: NSCoder) {
          fatalError("init(coder:) has not been implemented")
      }
@@ -110,12 +122,11 @@ public class LXTopTabBar: UIView {
 
 
 extension LXTopTabBar {
-    
     /// 初始化UI界面
-    fileprivate func setupUI() {
+    fileprivate func setupItemUI() {
         
         //添加button到view上
-        setupButtons()
+        setupItemButtons()
         
         //设置Button的frame
         setupButtonsFrame()
@@ -124,33 +135,46 @@ extension LXTopTabBar {
         addSubview(bottomLine)
 
     }
-    
+
     /// 初始化button
-    private func setupButtons() {
-        for (i, title) in titles.enumerated() {
-            let button = UIButton(type: .custom)
+    private func setupItemButtons() {
+                
+        for (i, item) in titleItems.enumerated() {
+            var button: UIButton
+            if i >= buttons.count {
+                button = Button.init(type: .custom)
+                button.setTitle(item.title, for: .normal)
+                button.titleLabel?.textAlignment = .center
+                button.adjustsImageWhenHighlighted = false
+                button.tag = i
+                if let image = item.image {
+                   button.setImage(image, for: .normal)
+                }
+                if let seletImage = item.selectImage {
+                   button.setImage(seletImage, for: .selected)
+                }
+                addSubview(button)
+                buttons.append(button)
+                button.addTarget(self, action: #selector(buttonClick(_:)), for: UIControl.Event.touchUpInside)
+            }else {
+                button = buttons[i]
+            }
             
             button.titleLabel?.font = normalTitleFont
-            button.setTitle(title, for: .normal)
-            button.tag = i
             button.setTitleColor(normalTitleColor, for: .normal)
             button.setTitleColor(selectTitleColor, for: .selected)
-            addSubview(button)
-            buttons.append(button)
-            button.addTarget(self, action: #selector(buttonClick(_:)), for: UIControl.Event.touchUpInside)
         }
     }
-    
+   
     /// 尺寸布局
     private func setupButtonsFrame() {
-        let count = titles.count
         
         for (i, button) in buttons.enumerated() {
-            let w: CGFloat = self.frame.width / CGFloat(count)
+            let w: CGFloat = self.frame.width / CGFloat(titleItems.count)
             let h: CGFloat = self.frame.height
             let y: CGFloat = 0
             button.frame = CGRect(x: w * CGFloat(i), y: y, width: w, height: h)
-            if i == 0 {
+            if i == selectButtonIndex {
                 buttonClick(button)
             }
         }
