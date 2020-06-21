@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,9 @@
 		04954165249FA43900935509 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04954163249FA43900935509 /* Main.storyboard */; };
 		04954167249FA43C00935509 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04954166249FA43C00935509 /* Assets.xcassets */; };
 		0495416A249FA43C00935509 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04954168249FA43C00935509 /* LaunchScreen.storyboard */; };
+		04954173249FA48300935509 /* LXTopTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04954172249FA48300935509 /* LXTopTabBar.swift */; };
+		04954175249FB0AE00935509 /* LXContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04954174249FB0AE00935509 /* LXContentView.swift */; };
+		B235A06141056F8904109AA8 /* Pods_LXTopTabBarManagerModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADADBA29244A5DC778FE881C /* Pods_LXTopTabBarManagerModule.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,11 @@
 		04954166249FA43C00935509 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04954169249FA43C00935509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0495416B249FA43C00935509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04954172249FA48300935509 /* LXTopTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTopTabBar.swift; sourceTree = "<group>"; };
+		04954174249FB0AE00935509 /* LXContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXContentView.swift; sourceTree = "<group>"; };
+		38F3CC676C2640885BEF5EF8 /* Pods-LXTopTabBarManagerModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXTopTabBarManagerModule.release.xcconfig"; path = "Target Support Files/Pods-LXTopTabBarManagerModule/Pods-LXTopTabBarManagerModule.release.xcconfig"; sourceTree = "<group>"; };
+		6FB75BEB2626A4AD0691AA66 /* Pods-LXTopTabBarManagerModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXTopTabBarManagerModule.debug.xcconfig"; path = "Target Support Files/Pods-LXTopTabBarManagerModule/Pods-LXTopTabBarManagerModule.debug.xcconfig"; sourceTree = "<group>"; };
+		ADADBA29244A5DC778FE881C /* Pods_LXTopTabBarManagerModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXTopTabBarManagerModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B235A06141056F8904109AA8 /* Pods_LXTopTabBarManagerModule.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,8 +49,11 @@
 		04954151249FA43900935509 = {
 			isa = PBXGroup;
 			children = (
+				04954171249FA46400935509 /* LXTopTabBarManager */,
 				0495415C249FA43900935509 /* LXTopTabBarManagerModule */,
 				0495415B249FA43900935509 /* Products */,
+				4B733DE52B3884539D7E76A6 /* Pods */,
+				1B480D77DD4DB12B00662A02 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +79,32 @@
 			path = LXTopTabBarManagerModule;
 			sourceTree = "<group>";
 		};
+		04954171249FA46400935509 /* LXTopTabBarManager */ = {
+			isa = PBXGroup;
+			children = (
+				04954172249FA48300935509 /* LXTopTabBar.swift */,
+				04954174249FB0AE00935509 /* LXContentView.swift */,
+			);
+			path = LXTopTabBarManager;
+			sourceTree = "<group>";
+		};
+		1B480D77DD4DB12B00662A02 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADADBA29244A5DC778FE881C /* Pods_LXTopTabBarManagerModule.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4B733DE52B3884539D7E76A6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6FB75BEB2626A4AD0691AA66 /* Pods-LXTopTabBarManagerModule.debug.xcconfig */,
+				38F3CC676C2640885BEF5EF8 /* Pods-LXTopTabBarManagerModule.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +112,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0495416E249FA43C00935509 /* Build configuration list for PBXNativeTarget "LXTopTabBarManagerModule" */;
 			buildPhases = (
+				235F64C188E607938C805891 /* [CP] Check Pods Manifest.lock */,
 				04954156249FA43900935509 /* Sources */,
 				04954157249FA43900935509 /* Frameworks */,
 				04954158249FA43900935509 /* Resources */,
+				50EF022690D27875F5CCB278 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,6 +173,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		235F64C188E607938C805891 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LXTopTabBarManagerModule-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		50EF022690D27875F5CCB278 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LXTopTabBarManagerModule/Pods-LXTopTabBarManagerModule-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LXTopTabBarManagerModule/Pods-LXTopTabBarManagerModule-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LXTopTabBarManagerModule/Pods-LXTopTabBarManagerModule-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		04954156249FA43900935509 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -140,7 +222,9 @@
 			files = (
 				04954162249FA43900935509 /* ViewController.swift in Sources */,
 				0495415E249FA43900935509 /* AppDelegate.swift in Sources */,
+				04954175249FB0AE00935509 /* LXContentView.swift in Sources */,
 				04954160249FA43900935509 /* SceneDelegate.swift in Sources */,
+				04954173249FA48300935509 /* LXTopTabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +366,7 @@
 		};
 		0495416F249FA43C00935509 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FB75BEB2626A4AD0691AA66 /* Pods-LXTopTabBarManagerModule.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -299,6 +384,7 @@
 		};
 		04954170249FA43C00935509 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38F3CC676C2640885BEF5EF8 /* Pods-LXTopTabBarManagerModule.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

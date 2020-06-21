@@ -1,0 +1,6 @@
+framework module Pods_LXTopTabBarManagerModule {
+  umbrella header "Pods-LXTopTabBarManagerModule-umbrella.h"
+
+  export *
+  module * { export * }
+}

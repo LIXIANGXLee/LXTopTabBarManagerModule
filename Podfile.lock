@@ -1,0 +1,16 @@
+PODS:
+  - LXFitManager (1.1.0)
+
+DEPENDENCIES:
+  - LXFitManager
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - LXFitManager
+
+SPEC CHECKSUMS:
+  LXFitManager: d76fa8e60a899fccf87c66fe33e19479e1d64906
+
+PODFILE CHECKSUM: ad26c667c78251b8f202d8b0e83ba3220eace0b1
+
+COCOAPODS: 1.9.1
