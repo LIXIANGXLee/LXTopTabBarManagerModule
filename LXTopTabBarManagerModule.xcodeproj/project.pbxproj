@@ -15,6 +15,7 @@
 		0495416A249FA43C00935509 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04954168249FA43C00935509 /* LaunchScreen.storyboard */; };
 		04954173249FA48300935509 /* LXTopTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04954172249FA48300935509 /* LXTopTabBar.swift */; };
 		04954175249FB0AE00935509 /* LXContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04954174249FB0AE00935509 /* LXContentView.swift */; };
+		04954177249FB4F600935509 /* LXTopTabBarManager.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 04954176249FB4F600935509 /* LXTopTabBarManager.podspec */; };
 		B235A06141056F8904109AA8 /* Pods_LXTopTabBarManagerModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADADBA29244A5DC778FE881C /* Pods_LXTopTabBarManagerModule.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		0495416B249FA43C00935509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04954172249FA48300935509 /* LXTopTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTopTabBar.swift; sourceTree = "<group>"; };
 		04954174249FB0AE00935509 /* LXContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXContentView.swift; sourceTree = "<group>"; };
+		04954176249FB4F600935509 /* LXTopTabBarManager.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LXTopTabBarManager.podspec; sourceTree = "<group>"; };
 		38F3CC676C2640885BEF5EF8 /* Pods-LXTopTabBarManagerModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXTopTabBarManagerModule.release.xcconfig"; path = "Target Support Files/Pods-LXTopTabBarManagerModule/Pods-LXTopTabBarManagerModule.release.xcconfig"; sourceTree = "<group>"; };
 		6FB75BEB2626A4AD0691AA66 /* Pods-LXTopTabBarManagerModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXTopTabBarManagerModule.debug.xcconfig"; path = "Target Support Files/Pods-LXTopTabBarManagerModule/Pods-LXTopTabBarManagerModule.debug.xcconfig"; sourceTree = "<group>"; };
 		ADADBA29244A5DC778FE881C /* Pods_LXTopTabBarManagerModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXTopTabBarManagerModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +51,7 @@
 		04954151249FA43900935509 = {
 			isa = PBXGroup;
 			children = (
+				04954176249FB4F600935509 /* LXTopTabBarManager.podspec */,
 				04954171249FA46400935509 /* LXTopTabBarManager */,
 				0495415C249FA43900935509 /* LXTopTabBarManagerModule */,
 				0495415B249FA43900935509 /* Products */,
@@ -165,6 +168,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04954177249FB4F600935509 /* LXTopTabBarManager.podspec in Resources */,
 				0495416A249FA43C00935509 /* LaunchScreen.storyboard in Resources */,
 				04954167249FA43C00935509 /* Assets.xcassets in Resources */,
 				04954165249FA43900935509 /* Main.storyboard in Resources */,
