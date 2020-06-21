@@ -44,12 +44,20 @@ public class LXTopTabBar: UIView {
     
     /// 默认title颜色
     public var normalTitleColor: UIColor = UIColor.lightGray {
-        didSet { setupItemButtons() }
+        didSet {
+            for button in buttons {
+                button.setTitleColor(normalTitleColor, for: .normal)
+            }
+        }
     }
     
     /// 选中title颜色
     public var selectTitleColor: UIColor = UIColor.red {
-       didSet { setupItemButtons() }
+       didSet {
+            for button in buttons {
+                button.setTitleColor(selectTitleColor, for: .selected)
+            }
+        }
     }
     
     /// 选中title字体大小
@@ -143,16 +151,8 @@ extension LXTopTabBar {
             var button: UIButton
             if i >= buttons.count {
                 button = Button.init(type: .custom)
-                button.setTitle(item.title, for: .normal)
                 button.titleLabel?.textAlignment = .center
                 button.adjustsImageWhenHighlighted = false
-                button.tag = i
-                if let image = item.image {
-                   button.setImage(image, for: .normal)
-                }
-                if let seletImage = item.selectImage {
-                   button.setImage(seletImage, for: .selected)
-                }
                 addSubview(button)
                 buttons.append(button)
                 button.addTarget(self, action: #selector(buttonClick(_:)), for: UIControl.Event.touchUpInside)
@@ -160,9 +160,17 @@ extension LXTopTabBar {
                 button = buttons[i]
             }
             
+            button.setTitle(item.title, for: .normal)
             button.titleLabel?.font = normalTitleFont
             button.setTitleColor(normalTitleColor, for: .normal)
             button.setTitleColor(selectTitleColor, for: .selected)
+            button.tag = i
+            if let image = item.image {
+               button.setImage(image, for: .normal)
+            }
+            if let seletImage = item.selectImage {
+               button.setImage(seletImage, for: .selected)
+            }
         }
     }
    

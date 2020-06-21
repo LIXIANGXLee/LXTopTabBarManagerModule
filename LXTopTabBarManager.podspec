@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "LXTopTabBarManager"
-  spec.version      = "0.2.0"
+  spec.version      = "0.2.1"
   spec.summary      = "LXTopTabBarManager."
 
   # This description is used to generate tags and improve search results.
