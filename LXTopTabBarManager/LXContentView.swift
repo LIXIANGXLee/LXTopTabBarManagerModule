@@ -9,31 +9,30 @@
 import UIKit
 
 private let kContentCellID = "kContentCellID"
-
-public typealias ContentViewCallBack = (Int) -> Void
 public class LXContentView: UIView {
+   
+    /// 回调函数
+    public var callBack: TopTabBarCallBack?
     
-    /// 选中的索引
-    public var selectContentIndex: Int = 0 {
-        didSet {
-           if selectContentIndex >= childVcs.count || selectContentIndex < 0 { return }
-            let indexPath = IndexPath(item: selectContentIndex, section: 0)
-            collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
-        }
-     }
+    /// 选中的索引 对应的内容
+    public var selectIndex: Int = 0 {
+       didSet {
+          setContent(select: selectIndex, animation: true)
+       }
+    }
+     
+    private var childVcs: [UIViewController]
+    private weak var parentVc: UIViewController?
+    private lazy var layout: UICollectionViewFlowLayout = {
+          let layout = UICollectionViewFlowLayout()
+          layout.itemSize = bounds.size
+          layout.minimumLineSpacing = 0
+          layout.minimumInteritemSpacing = 0
+          layout.scrollDirection = .horizontal
+          return layout
+    }()
     
-    public var callBack: ContentViewCallBack?
-    
-    fileprivate var childVcs: [UIViewController]
-    fileprivate weak var parentVc: UIViewController?
-    
-    fileprivate lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = bounds.size
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        layout.scrollDirection = .horizontal
-        
+    private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -42,7 +41,6 @@ public class LXContentView: UIView {
         collectionView.bounces = false
         collectionView.scrollsToTop = false
         collectionView.showsHorizontalScrollIndicator = false
-
         return collectionView
     }()
     
@@ -63,16 +61,29 @@ public class LXContentView: UIView {
     }
 }
 
+ 
+// MARK: - public 扩展
 extension LXContentView {
-    /// 给外界回调
-     public func setHandle(_ callBack: ContentViewCallBack?) {
-          self.callBack = callBack
-      }
+    
+    /// 给外界回调 滚动内容时的回调
+     public func setHandle(_ callBack: TopTabBarCallBack?) {
+        self.callBack = callBack
+     }
      
+     /// 设置内容滚动位置
+     public func setContent(select index: Int, animation: Bool) {
+        // 边界处理
+        if index >= childVcs.count || index < 0 { return }
+        // 滚动 的位置
+        let indexPath = IndexPath(item: index, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .left, animated: animation)
+     }
 }
 
 extension LXContentView {
-    fileprivate func setupUI() {
+    
+    /// 初始化UI
+    private func setupUI() {
         //添加子控制器到父控制器中
         for childVc in childVcs {
             parentVc?.addChild(childVc)
@@ -82,7 +93,7 @@ extension LXContentView {
     }
 }
 
-
+// MARK: - UICollectionViewDataSource
 extension LXContentView: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return childVcs.count
@@ -90,9 +101,7 @@ extension LXContentView: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kContentCellID, for: indexPath)
-        for subView in cell.contentView.subviews {
-            subView.removeFromSuperview()
-        }
+        
         let childVc = childVcs[indexPath.item]
         childVc.view.frame = cell.contentView.bounds
         cell.contentView.addSubview(childVc.view)

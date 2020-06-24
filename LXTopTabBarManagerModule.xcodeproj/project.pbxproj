@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		044D368124A3A8240090B77F /* LXTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044D368024A3A8240090B77F /* LXTestViewController.swift */; };
 		0495415E249FA43900935509 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0495415D249FA43900935509 /* AppDelegate.swift */; };
 		04954160249FA43900935509 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0495415F249FA43900935509 /* SceneDelegate.swift */; };
 		04954162249FA43900935509 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04954161249FA43900935509 /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		044D368024A3A8240090B77F /* LXTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTestViewController.swift; sourceTree = "<group>"; };
 		0495415A249FA43900935509 /* LXTopTabBarManagerModule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LXTopTabBarManagerModule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0495415D249FA43900935509 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0495415F249FA43900935509 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				04954166249FA43C00935509 /* Assets.xcassets */,
 				04954168249FA43C00935509 /* LaunchScreen.storyboard */,
 				0495416B249FA43C00935509 /* Info.plist */,
+				044D368024A3A8240090B77F /* LXTestViewController.swift */,
 			);
 			path = LXTopTabBarManagerModule;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				0495415E249FA43900935509 /* AppDelegate.swift in Sources */,
 				04954175249FB0AE00935509 /* LXContentView.swift in Sources */,
 				04954160249FA43900935509 /* SceneDelegate.swift in Sources */,
+				044D368124A3A8240090B77F /* LXTestViewController.swift in Sources */,
 				04954173249FA48300935509 /* LXTopTabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
