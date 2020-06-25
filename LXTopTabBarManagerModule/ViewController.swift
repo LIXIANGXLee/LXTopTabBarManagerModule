@@ -30,6 +30,8 @@ class ViewController: UIViewController {
         topTabbar.selectTitleFont = UIFont.systemFont(ofSize: 20)
         topTabbar.normalTitleFont = UIFont.systemFont(ofSize: 19)
         topTabbar.bottomLineColor = UIColor.blue
+               
+//        topTabbar.selectIndex = 1
 
         
         topTabbar.setRedPoint(x: LXFit.fitFloat(87), y: LXFit.fitFloat(-5))
@@ -55,7 +57,7 @@ class ViewController: UIViewController {
             topTabbar.selectIndex = index
         }
 
-        topTabbar.selectIndex = 2
+//        topTabbar.selectIndex = 2
         
     }
 }

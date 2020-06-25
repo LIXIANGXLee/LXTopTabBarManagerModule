@@ -201,10 +201,7 @@ extension LXTopTabBar {
             topButton.normalImage  = model.image
             topButton.selectedImage  = model.selectImage
             topButton.addTarget(self, action: #selector(buttonClick(_:)), for:.touchUpInside)
-
-            if i == selectIndex {
-                 buttonClick(topButton)
-            }
+            
         }
     }
    
@@ -213,9 +210,11 @@ extension LXTopTabBar {
         
         let w: CGFloat = self.frame.width / CGFloat(allItems.count)
         let h: CGFloat = self.frame.height
-        
         for (i, button) in allItems.enumerated() {
             button.frame = CGRect(x: w * CGFloat(i), y: 0, width: w, height: h)
+            if i == selectIndex {
+                buttonClick(button)
+            }
         }
     }
 }
