@@ -9,6 +9,12 @@
 import UIKit
 import LXFitManager
 
+public enum TopTabBarType {
+    case none  // 隐藏红点
+    case red   // 显示红点
+    case count // 显示数量
+}
+
 /// 回调生命
 public typealias TopTabBarCallBack = (Int) -> Void
 public protocol LXTopTabBarDelegate: AnyObject {
@@ -61,7 +67,7 @@ public class LXTopTabBar: UIView {
     public var normalTitleColor: UIColor = UIColor.lightGray {
         didSet {
             for button in allItems {
-                button.setTitleColor(normalTitleColor, for: .normal)
+                button.normalTitleColor = normalTitleColor
             }
         }
     }
@@ -70,7 +76,7 @@ public class LXTopTabBar: UIView {
     public var selectTitleColor: UIColor = UIColor.red {
        didSet {
             for button in allItems {
-                button.setTitleColor(selectTitleColor, for: .selected)
+                button.selectTitleColor = selectTitleColor
             }
         }
     }
@@ -80,7 +86,7 @@ public class LXTopTabBar: UIView {
         didSet {
             for button in allItems {
                if button == lastSelectButton {
-                  button.titleLabel?.font = selectTitleFont
+                  button.selectTitleFont = selectTitleFont
                }
             }
         }
@@ -91,7 +97,7 @@ public class LXTopTabBar: UIView {
            didSet {
                for button in allItems {
                   if button != lastSelectButton {
-                     button.titleLabel?.font = normalTitleFont
+                     button.normalTitleFont = normalTitleFont
                   }
                }
            }
@@ -136,6 +142,34 @@ public class LXTopTabBar: UIView {
      }
 }
 
+// MARK:- public 监听事件
+extension LXTopTabBar {
+    
+    /// 给外界回调
+    public func setHandle(_ callBack: TopTabBarCallBack?) {
+         self.callBack = callBack
+    }
+    
+    /// 设置tabbar选中位置
+    public func setTabBar(select index: Int) {
+        if index >= allItems.count || index < 0 { return }
+        buttonClick(allItems[index])
+    }
+    
+    /// 统一设置小红点位置 如果设置单个 可调用 allItems 中的 redViewPoint
+    public func setRedPoint(x: CGFloat, y: CGFloat) {
+        for button in allItems {
+           button.redViewPoint = CGPoint(x: x, y: y)
+        }
+    }
+    
+    /// 统一设置小红点大小  如果设置单个 可调用 allItems 中的 redViewSize
+    public func setRedSize(size: CGFloat) {
+        for button in allItems {
+           button.redViewSize = size
+        }
+    }
+}
 
 extension LXTopTabBar {
     /// 初始化UI界面
@@ -184,22 +218,6 @@ extension LXTopTabBar {
             button.frame = CGRect(x: w * CGFloat(i), y: 0, width: w, height: h)
         }
     }
-}
-
-// MARK:- public 监听事件
-extension LXTopTabBar {
-    
-    /// 给外界回调
-    public func setHandle(_ callBack: TopTabBarCallBack?) {
-         self.callBack = callBack
-    }
-    
-    /// 设置tabbar选中位置
-    public func setTabBar(select index: Int) {
-        if index >= allItems.count || index < 0 { return }
-        buttonClick(allItems[index])
-    }
-    
 }
 
 // MARK:- private 监听事件
@@ -284,16 +302,69 @@ public class LXTopButton: UIButton {
         }
     }
     
-
+    public var redViewSize: CGFloat = LXFit.fitFloat(5){
+        didSet { setNeedsLayout() }
+    }
+    
+    public var redViewPoint: CGPoint = CGPoint(x: 0, y: 0) {
+        didSet { setNeedsLayout() }
+    }
+    
+    public var type: TopTabBarType = .none {
+        didSet {
+            if type != .count{
+                redView.setTitleColor(UIColor.clear, for: .normal)
+            }
+            redView.isHidden = type == .none
+        }
+    }
+    
+    public var redViewBackgroundColor: UIColor = UIColor.red {
+        didSet { redView.backgroundColor = redViewBackgroundColor }
+    }
+    
+    public var redViewCount: Int = 0 {
+        didSet { redView.setTitle("\(redViewCount)", for: .normal)}
+    }
+    
+    public var redViewTitleFont: UIFont = UIFont.systemFont(ofSize: 14).fitFont {
+        didSet { redView.titleLabel?.font = redViewTitleFont}
+    }
+    
+    public var redViewTitleColor: UIColor = UIColor.white {
+        didSet { redView.setTitleColor(redViewTitleColor, for: .normal)}
+     }
+     
+    private lazy var redView: UIButton = {
+        let redView = UIButton(type: .custom)
+        redView.backgroundColor = redViewBackgroundColor
+        return redView
+    }()
+    
     public weak var  delegate: LXTopTabBarDelegate?
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        addSubview(redView)
         titleLabel?.textAlignment = .center
         adjustsImageWhenHighlighted = false
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if type == .red {
+            redView.frame = CGRect(origin: redViewPoint, size: CGSize(width: redViewSize, height: redViewSize))
+        }else if type == .count {
+            let w = redView.titleLabel?.attributedText?.boundingRect(with: CGSize(width: LXFit.fitFloat(100), height: redViewSize), options: .usesLineFragmentOrigin, context: nil).size.width ?? 0
+            redView.frame = CGRect(origin: redViewPoint, size: CGSize(width: max(w + LXFit.fitFloat(10), redViewSize) , height: redViewSize))
+        }
+        
+        redView.layer.cornerRadius = redViewSize * 0.5
+        redView.clipsToBounds = true
     }
     
     public override func titleRect(forContentRect contentRect: CGRect) -> CGRect {

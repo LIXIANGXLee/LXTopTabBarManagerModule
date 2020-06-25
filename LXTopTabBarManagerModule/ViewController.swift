@@ -29,8 +29,17 @@ class ViewController: UIViewController {
         topTabbar.normalTitleColor = UIColor.purple
         topTabbar.selectTitleFont = UIFont.systemFont(ofSize: 20)
         topTabbar.normalTitleFont = UIFont.systemFont(ofSize: 19)
-//        topTabbar.bottomLineAverage = true
         topTabbar.bottomLineColor = UIColor.blue
+
+        
+        topTabbar.setRedPoint(x: LXFit.fitFloat(87), y: LXFit.fitFloat(-5))
+        topTabbar.setRedSize(size: LXFit.fitFloat(20))
+        topTabbar.allItems[0].type = .count
+        topTabbar.allItems[0].redViewCount = 200
+        
+        topTabbar.allItems[1].type = .red
+        topTabbar.allItems[1].redViewCount = 200
+        topTabbar.allItems[1].redViewSize = LXFit.fitFloat(5)
         view.addSubview(topTabbar)
        
        
@@ -40,16 +49,12 @@ class ViewController: UIViewController {
         
         
         topTabbar.setHandle { (index) in
-                   print("======\(index)")
             contentView.selectIndex = index
         }
-        
         contentView.setHandle { (index) in
             topTabbar.selectIndex = index
-            print("======\(index)")
-             
         }
-             
+
         topTabbar.selectIndex = 2
         
     }
