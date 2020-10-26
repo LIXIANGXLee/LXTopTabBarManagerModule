@@ -62,6 +62,9 @@ public class LXTopTabBar: UIView {
         didSet {
             guard let bottomLineW = bottomLineW else { return }
             bottomLine.frame.size.width = bottomLineW
+            if  (0..<allItems.count).contains(selectIndex) {
+                bottomLine.center.x = allItems[selectIndex].center.x
+            }
         }
     }
 

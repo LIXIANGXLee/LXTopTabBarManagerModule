@@ -25,6 +25,7 @@ class ViewController: UIViewController {
 
         let topTabbar = LXTopTabBar(frame: CGRect(x: 0, y: 100, width: UIScreen.main.bounds.width, height: 70), titleModels: [item1,item2,item3])
         topTabbar.delegate = self
+        topTabbar.bottomLineW = LXFit.fitFloat(10)
         topTabbar.selectTitleColor = UIColor.orange
         topTabbar.normalTitleColor = UIColor.purple
         topTabbar.selectTitleFont = UIFont.systemFont(ofSize: 20)
