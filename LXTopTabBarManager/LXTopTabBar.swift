@@ -56,6 +56,16 @@ public class LXTopTabBar: UIView {
         }
     }
     
+    
+    /// 下划线宽度
+    public var bottomLineW: CGFloat?{
+        didSet {
+            guard let bottomLineW = bottomLineW else { return }
+            bottomLine.frame.size.width = bottomLineW
+        }
+    }
+
+    
     ///下划线是否均分
     public var bottomLineAverage: Bool = false{
         didSet {
@@ -232,8 +242,8 @@ extension LXTopTabBar {
     /// 设置线的位置
     private func setLineX(button: UIButton) {
         
-        if !bottomLineAverage {
-             bottomLine.frame.size.width  = button.titleLabel?.text?.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 0), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: button.titleLabel!.font!], context: nil).width ?? 0
+        if !bottomLineAverage && self.bottomLineW == nil {
+            bottomLine.frame.size.width  = button.titleLabel?.text?.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 0), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: button.titleLabel!.font!], context: nil).width ?? 0
         }
         
         UIView.animate(withDuration: 0.15) {
